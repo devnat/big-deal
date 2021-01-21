@@ -1,7 +1,4 @@
-FROM php:7.2-fpm
-
-# Copy composer.lock and composer.json
-COPY composer.lock composer.json /var/www/
+FROM php:7.3-fpm
 
 # Set working directory
 WORKDIR /var/www
@@ -14,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     locales \
     zip \
+    libzip-dev \
     jpegoptim optipng pngquant gifsicle \
     vim \
     unzip \
@@ -35,14 +33,13 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
-# Copy existing application directory contents
-COPY . /var/www
-
-# Copy existing application directory permissions
-COPY --chown=www:www . /var/www
-
 # Change current user to www
 USER www
+
+# Copy existing application directory
+COPY --chown=www:www . /var/www
+
+RUN /usr/local/bin/composer install
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
