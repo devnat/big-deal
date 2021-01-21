@@ -13,11 +13,13 @@ To start all of the containers, create the volumes, and set up and connect the n
 
 **docker-compose up -d**
 
+
+**[OPTIONAL]**
+
 To ensure that your user sessions and encrypted data remain secure run following command:
 
 **docker-compose exec app php artisan key:generate**
 
-**[OPTIONAL]**
 To create database user (other than root) follow these steps.
 1. Connect to db container running this command:
 
