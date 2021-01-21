@@ -22,18 +22,23 @@ To create database user (other than root) follow these steps.
 
 1. Connect to db container running this command:
 
+```bash
 docker-compose exec db bash
+```
 
 2.Connect to mysql database:
 
+```bash
 mysql -u root -p 
-
-(with password laravel)
+```
+**password**: laravel
 
 3.Create a user by running following two commands:
 
+```
 GRANT ALL ON laravel.* TO 'laraveluser'@'%' IDENTIFIED BY ‘laravel’;
 FLUSH PRIVILEGES;
+```
 
 4.Make sure you updated DB_USERNAME variable in .env file.
 
