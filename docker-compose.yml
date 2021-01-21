@@ -20,6 +20,8 @@ services:
     command: bash -c 'php artisan migrate && php artisan db:seed --class=OffersSeeder && php-fpm'
     networks:
       - app-network
+    depends_on:
+      - db
 
   #Nginx Service
   webserver:
